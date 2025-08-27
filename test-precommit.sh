@@ -56,6 +56,18 @@ run_test() {
   # Copy test files
   cp -r "${test_dir}"/* . 2>/dev/null || true
 
+  # For auto-fixable tests, rename .txt files to proper extensions
+  if [[ "${test_name}" == "Auto-fixable files test" ]]; then
+    for txt_file in *.txt; do
+      if [[ -f "${txt_file}" ]]; then
+        # Remove .txt extension to get the proper filename
+        proper_file="${txt_file%.txt}"
+        cp "${txt_file}" "${proper_file}"
+        rm "${txt_file}" # Remove the .txt version from temp repo
+      fi
+    done
+  fi
+
   # Stage all files
   git add .
 
