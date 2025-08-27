@@ -1,0 +1,34 @@
+---
+name: "Broken YAML Configuration"
+version: "1.0.0"
+description: "A YAML file with structural errors"
+
+settings:
+  debug: false
+  log_level: "info"
+  timeout: 30
+  # Invalid indentation below
+invalid_indent: "this line has wrong indentation"
+
+database:
+  host: "localhost"
+  port: 5432
+  name: "testdb"
+  ssl: true
+    # This line has incorrect indentation
+  extra_field: "wrong indent"
+
+features:
+  - authentication
+  - logging
+  - metrics
+  - caching
+- this_item_has_wrong_indent: true
+
+# Invalid YAML structure below
+invalid_structure:
+  key_without_value:
+    - item1
+    - item2
+  another_key_without_value:
+invalid_end

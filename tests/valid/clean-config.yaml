@@ -1,0 +1,21 @@
+---
+name: "Clean YAML Configuration"
+version: "1.0.0"
+description: "A properly formatted YAML file"
+
+settings:
+  debug: false
+  log_level: "info"
+  timeout: 30
+
+database:
+  host: "localhost"
+  port: 5432
+  name: "testdb"
+  ssl: true
+
+features:
+  - authentication
+  - logging
+  - metrics
+  - caching

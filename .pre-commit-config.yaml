@@ -1,0 +1,69 @@
+---
+# Local pre-commit config that mirrors global but excludes test files
+repos:
+  # Python formatting and linting
+  - repo: https://github.com/psf/black.git
+    rev: 25.1.0
+    hooks:
+      - id: black
+        name: "Python Formatter (black)"
+        args: [--quiet]
+        verbose: true
+        exclude: ^tests/(auto-fixable|non-fixable)/
+
+  - repo: https://github.com/PyCQA/flake8.git
+    rev: 7.3.0
+    hooks:
+      - id: flake8
+        name: "Python Lint (flake8)"
+        additional_dependencies: [flake8-bugbear]
+        exclude: ^tests/(auto-fixable|non-fixable)/
+
+  # Shell linting and formatting using global script
+  - repo: local
+    hooks:
+      - id: shell-lint-fix
+        name: Shell Scripts Lint & Auto-Fix with Summary
+        entry: /Users/andrewrich/.config/git/hooks/lint-shell.sh
+        language: system
+        types: [shell]
+        pass_filenames: true
+        verbose: true
+        exclude: ^tests/(auto-fixable|non-fixable)/
+
+  # YAML linting
+  - repo: local
+    hooks:
+      - id: yamllint
+        name: "YAML Lint (yamllint)"
+        entry: yamllint
+        language: system
+        types: [yaml]
+        pass_filenames: true
+        verbose: true
+        exclude: ^tests/(auto-fixable|non-fixable)/
+
+  # HTML validation via tidy
+  - repo: local
+    hooks:
+      - id: html-tidy
+        name: "HTML Validation (tidy)"
+        entry: tidy -q -e
+        language: system
+        types: [html]
+        pass_filenames: true
+        verbose: true
+        exclude: ^tests/(auto-fixable|non-fixable)/
+
+  # Markdown linting
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.45.0
+    hooks:
+      - id: markdownlint
+        name: markdownlint (fix)
+        entry: markdownlint --fix
+        language: node
+        types: [markdown]
+        verbose: true
+        args: ["--config", "/Users/andrewrich/.config/markdownlint-cli/.markdownlint.json"]
+        exclude: ^tests/(auto-fixable|non-fixable)/
