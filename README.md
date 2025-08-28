@@ -8,6 +8,11 @@ This project provides a comprehensive test suite for the global pre-commit hook 
 
 - `test-precommit.sh` - Main test runner that exercises all code paths
 
+### Performance Profiling
+
+- Performance analysis tools for measuring pre-commit hook execution times
+- See [profiling-readme.md](profiling-readme.md) for detailed documentation on profiling tools
+
 ### Test Files
 
 - `tests/valid/` - Clean files that should pass all pre-commit checks
